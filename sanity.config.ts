@@ -28,14 +28,13 @@ export default defineConfig([{
 		dashboardTool({
 			widgets: [
 				projectInfoWidget(),
-				projectUsersWidget({ layout: 'medium' }),
+				projectUsersWidget(),
 			]
 		}),
 	],
 
 	document: {
 		actions: [FreigabeText],
-		badges: (prev, context) => context.schemaType === 'size' ? [HelloWorldBadge, ...prev] : prev,
 	},
 
 	schema: {
