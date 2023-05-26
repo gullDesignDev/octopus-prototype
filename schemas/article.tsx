@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { ComposeIcon } from '@sanity/icons';
-import { DashboardWidgetContainer } from "@sanity/dashboard";
+import articleType from './articleType'
+
 
 export default defineType({
 	name: 'article',
@@ -108,6 +109,11 @@ export default defineType({
 			title: 'Artikeltyp',
 			type: 'string',
 			group: 'basics',
+			options: {
+				list: [
+					...articleType,
+				],
+			},
 			validation: Rule => Rule.required()
 		}),
 		defineField({
