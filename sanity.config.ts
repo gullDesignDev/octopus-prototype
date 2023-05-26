@@ -2,7 +2,7 @@ import { defineConfig, isDev } from 'sanity'
 import { visionTool } from '@sanity/vision'
 import { deskTool } from 'sanity/desk'
 import { schemaTypes } from './schemas'
-import { RobotIcon, RocketIcon } from '@sanity/icons'
+import { EarthAmericasIcon, JoystickIcon } from '@sanity/icons'
 import {
 	dashboardTool,
 	projectUsersWidget,
@@ -16,20 +16,21 @@ const devOnlyPlugins = [getStartedPlugin()]
 
 export default defineConfig([{
 	name: 'default',
-	title: 'project-octopus',
+	title: 'Production',
 	projectId: 'f2ttt5xy',
 	dataset: 'production',
 	basePath: '/default',
-	icon: RobotIcon,
+	icon: EarthAmericasIcon,
 
-	plugins: [dashboardTool({
-		widgets: [
-			projectInfoWidget(),
-			projectUsersWidget({ layout: 'medium' }),
-		]
-	}),
-	deskTool(),
-	visionTool(), ...(isDev ? devOnlyPlugins : [])
+	plugins: [
+		deskTool(),
+		visionTool(), ...(isDev ? devOnlyPlugins : []),
+		dashboardTool({
+			widgets: [
+				projectInfoWidget(),
+				projectUsersWidget({ layout: 'medium' }),
+			]
+		}),
 	],
 
 	document: {
@@ -43,12 +44,15 @@ export default defineConfig([{
 },
 {
 	projectId: 'f2ttt5xy',
-	dataset: 'staging',
-	name: 'staging-workspace',
-	basePath: '/staging',
-	title: 'Another Workspace!',
-	icon: RocketIcon,
-	plugins: [deskTool()],
+	dataset: 'dev',
+	name: 'dev-workspace',
+	basePath: '/dev',
+	title: 'Playground',
+	icon: JoystickIcon,
+	plugins: [
+		deskTool(),
+		visionTool(), ...(isDev ? devOnlyPlugins : []),
+	],
 	schema: {
 		types: schemaTypes,
 	},
